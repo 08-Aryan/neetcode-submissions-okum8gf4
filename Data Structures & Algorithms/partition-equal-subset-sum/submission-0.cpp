@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool dfs(vector<int> nums, int idx,int target){
+        if(idx==nums.size()){
+            return target==0;
+        }
+        // target to 0 se bhi kam ho gaya then to galat hi hai ye opt
+        if(target < 0){
+            return false;
+        }
+        return dfs(nums,idx+1,target) || dfs(nums,idx+1,target-nums[idx]);
+    }
+    bool canPartition(vector<int>& nums) {
+        int sum = 0;
+        for(auto num:nums){
+            sum += num;
+        }
+        if(sum%2==1){
+            return false;
+        }
+        return dfs(nums,0,sum/2);
+        
+    }
+};
